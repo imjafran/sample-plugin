@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.evr-thank-you a,
+.evr-thank-you a:hover,
+.evr-thank-you a.visited {
+  text-decoration: none !important; }
+  .evr-thank-you a.button,
+  .evr-thank-you a:hover.button,
+  .evr-thank-you a.visited.button {
+    color: #f0f0f0 !important; }
+  .evr-thank-you a:not(.button),
+  .evr-thank-you a:hover:not(.button),
+  .evr-thank-you a.visited:not(.button) {
+    color: #3379e9 !important;
+    transition: 0.2s color; }
+    .evr-thank-you a:not(.button):hover,
+    .evr-thank-you a:hover:not(.button):hover,
+    .evr-thank-you a.visited:not(.button):hover {
+      color: #0e387c !important; }

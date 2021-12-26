@@ -1,0 +1,32 @@
+{
+  "name": "wp-plugin-boilerplate",
+  "version": "1.0.0",
+  "description": "WP Plugin Boilerplate by Jafran Hasan",
+  "main": "src/js/admin.js",
+  "scripts": {
+    "install": "npm install",
+    "tailwind:admin": "npx tailwindcss -i ./src/scss/admin.scss -o ./public/css/admin.css --watch",
+    "tailwind:frontend": "npx tailwindcss -i ./src/scss/frontend.scss -o ./public/css/frontend.css --watch",
+    "webpack:admin": "npx webpack --config ./webpack.admin.js --watch",
+    "webpack:frontend": "npx webpack --config ./webpack.frontend.js  --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imjafran/wp-plugin-boilerplate.git"
+  },
+  "keywords": [],
+  "author": "imjafran",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/imjafran/wp-plugin-boilerplate/issues"
+  },
+  "homepage": "https://github.com/imjafran/wp-plugin-boilerplate#readme",
+  "devDependencies": {
+    "autoprefixer": "^10.4.0",
+    "postcss": "^8.4.4",
+    "tailwindcss": "^2.2.19",
+    "vue": "^3.2.23",
+    "webpack": "^5.64.4",
+    "webpack-cli": "^4.9.1"
+  }
+}
