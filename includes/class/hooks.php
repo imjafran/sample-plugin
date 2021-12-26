@@ -6,6 +6,7 @@ defined('ABSPATH') or die('Direct Script not Allowed');
 
 # Action and Filter Hooks
 if(!class_exists("\SamplePlugin\Hooks")) {
+    
     class Hooks
     {
         # Singleton pattern

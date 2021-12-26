@@ -5,6 +5,7 @@ namespace SameplPlugin;
 defined('ABSPATH') or die('Direct Script not Allowed');
  
 if(!class_exists("\SameplPlugin\Ajax")){
+
     class Ajax {
 
         # Singleton pattern
@@ -54,13 +55,9 @@ if(!class_exists("\SameplPlugin\Ajax")){
             wp_send_json( 'Works' );
         }
  
-    }
-
-
+    } 
     # load only when it's an ajax call
     if(wp_doing_ajax()) {
-        add_action( 'plugins_loaded', function(){
-            Ajax::instance()->init();
-        } );
+        Ajax::instance()->init();
     }
 }
