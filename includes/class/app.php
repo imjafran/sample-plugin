@@ -7,6 +7,7 @@ defined('ABSPATH') or die('Direct Script not Allowed');
 /** 
  * Core Hooks 
  */
+
 final class App
 {
 

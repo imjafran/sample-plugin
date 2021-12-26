@@ -19,7 +19,7 @@ if (!function_exists('write_log')) {
             fwrite($myfile, $log . "\n"); 
             fclose($myfile); 
         } catch(\Exception $e) {
-            // do nothing
+            # do nothing 
         }
     }
 

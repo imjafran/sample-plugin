@@ -3,7 +3,7 @@ module.exports = {
     enabled: false,
     content: ["./includes/templates/admin.php", "./public/js/admin.min.js"],
   },
-  darkMode: false, // or 'media' or 'class'
+  darkMode: false,
   theme: {
     extend: {},
   },
