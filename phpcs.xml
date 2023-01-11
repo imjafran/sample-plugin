@@ -1,0 +1,167 @@
+<?xml version="1.0" ?>
+<!--
+	WordPress Coding Standard
+
+	@package wp-coding-standard
+	@version 1.0.0
+-->
+<ruleset name="WordPressCodingStandard">
+
+    <description>WordPress Coding Standard</description>
+
+	<!-- Exclusions  -->
+    <exclude-pattern>node_modules/*</exclude-pattern>
+	<!-- <exclude-pattern>public/*</exclude-pattern>
+	<exclude-pattern>src/*</exclude-pattern> -->
+
+	<!-- Text-domain -->
+	<!-- <rule ref="WordPress.WP.I18n">
+		<properties>-
+			<property
+        name="text_domain"
+        type="array"
+        value="wp-dark-mode"
+      />
+		</properties>
+	</rule> -->
+
+	<!-- 
+		####                   ####
+		#### No Need to Modify ####
+		####                   ####
+	-->
+
+    <!-- Scan all files in directory -->
+    <file>.</file>
+
+    <!-- Scan only PHP files -->
+    <arg name="extensions" value="php" />
+
+	<!-- Show progress -->
+    <arg value="ps" />
+
+	<!-- Show colors in console -->
+	<arg name="colors" />
+
+	<!-- Paraller file checking -->
+	<arg name="parallel" value="20" />
+
+    <!-- Show sniff codes in all reports -->
+    <arg value="ns" />
+
+	<!-- 
+		####              ####
+		#### PHP Rulesets ####
+		####              ####
+	-->
+
+	<!-- Minimum version of PHP required to run the plugin.  -->
+	<config name="testVersion" value="7.2-" />
+
+	<!-- Check PHP version compatibility. -->
+	<!-- <rule ref="PHPCompatibility" /> -->
+
+	<!-- Allow tab indent  -->
+	<rule ref="Generic.WhiteSpace.DisallowTabIndent">
+		<exclude name="Generic.WhiteSpace.DisallowTabIndent.TabsUsed" />
+	</rule>
+
+	
+	<!-- Generic.Arrays.DisallowLongArraySyntax  -->
+	<rule ref="Generic.Arrays.DisallowLongArraySyntax" />
+
+	<!-- Allow short array syntax  -->
+	<rule ref="Generic.Arrays.DisallowShortArraySyntax">
+		<exclude name="Generic.Arrays.DisallowShortArraySyntax.Found" />
+	</rule>
+
+	<!-- Generic.Commenting -->
+	<rule ref="Generic.Commenting" />
+
+	<!-- Generic.CodeAnalysis -->
+	<rule ref="Generic.CodeAnalysis" />
+
+	<!-- spacing and indentation -->
+	<rule ref="Generic.WhiteSpace" />
+
+	<!-- whitespace in function arguements  -->
+	<rule ref="Generic.Functions.FunctionCallArgumentSpacing">
+		<exclude
+      name="Generic.Functions.FunctionCallArgumentSpacing.NoSpaceAfterComma"
+    />
+	</rule>
+
+	<!-- ignore Generic.Files.EndFileNewline.NotFound  -->
+	<rule ref="Generic.Files.EndFileNewline">
+		<exclude name="Generic.Files.EndFileNewline.NotFound" />
+	</rule>
+	
+
+	<!-- Nested level of condition is 3 ro reduce code complexity -->
+	<rule ref="Generic.CodeAnalysis.ForLoopWithTestFunctionCall">
+		<properties>
+			<property name="maxNestedLevel" value="3" />
+		</properties>
+	</rule>
+
+	<rule ref="PEAR.Functions.FunctionCallSignature.EmptyLine" />
+
+	<!-- Check class exists  -->
+	<rule ref="Generic.Classes.DuplicateClassName">
+		<type>warning</type>
+	</rule>
+
+	<!-- Missing Package Tag  -->
+	<rule ref="Squiz.Commenting.FileComment.MissingPackageTag" />
+	<rule ref="Squiz.Commenting.FileComment.Missing" />
+
+	<!-- Squize  -->
+	<rule
+    ref="Squiz.Classes.ClassFileName"
+  /> <!-- Class name doesn't match filename -->
+	<rule ref="Squiz.Classes.ValidClassName" /> <!-- Valid class name -->
+	<rule
+    ref="Squiz.Commenting.FunctionCommentThrowTag.Missing"
+  /> <!-- Missing @throws tag in function comment -->
+	<rule
+    ref="Squiz.Commenting.FileComment.Missing"
+  /> <!-- Missing file doc comment -->
+
+	<!-- Ignore class name validation  -->
+	<rule ref="Squiz.Classes.ValidClassName">
+		<exclude name="Squiz.Classes.ValidClassName.NotCamelCaps" />
+	</rule>
+
+	<!-- Squiz.Classes.ClassFileName -->
+	<rule ref="Squiz.Classes.ClassFileName">
+		<exclude name="Squiz.Classes.ClassFileName.NoMatch" />
+	</rule>
+	
+	<!-- 
+		####                    ####
+		#### WordPress Rulesets ####
+		####                    ####
+	-->
+
+    <config name="minimum_supported_wp_version" value="5.2" />
+
+    <!-- WordPress -->
+    <rule ref="WordPress" /> 
+
+	<!-- Allow short ternary (codition ? true : false) -->
+	<rule ref="WordPress.PHP.DisallowShortTernary.Found" />
+
+	<!-- exclude WordPress InvalidClassFileName  -->
+	<rule ref="WordPress.Files.FileName">
+		<exclude name="WordPress.Files.FileName.InvalidClassFileName" />
+	</rule>
+
+	
+
+	<!-- 
+		####                     		      ####
+		#### End of WordPress Coding Standard ####
+		####                    		      ####
+	-->
+
+</ruleset>
