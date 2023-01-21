@@ -1,2 +1,2 @@
 <?php
-// Silence is golden.
+// A fish with closed mouth never gets caught.

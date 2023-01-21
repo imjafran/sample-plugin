@@ -5,25 +5,21 @@
 	@package wp-coding-standard
 	@version 1.0.0
 -->
-<ruleset name="WordPressCodingStandard">
+<ruleset name="WordPressCS">
 
     <description>WordPress Coding Standard</description>
 
 	<!-- Exclusions  -->
     <exclude-pattern>node_modules/*</exclude-pattern>
-	<!-- <exclude-pattern>public/*</exclude-pattern>
-	<exclude-pattern>src/*</exclude-pattern> -->
+	<exclude-pattern>public/*</exclude-pattern>
+	<exclude-pattern>src/*</exclude-pattern>
 
 	<!-- Text-domain -->
-	<!-- <rule ref="WordPress.WP.I18n">
+	<rule ref="WordPress.WP.I18n">
 		<properties>-
-			<property
-        name="text_domain"
-        type="array"
-        value="wp-dark-mode"
-      />
+			<property name="text_domain" type="array" value="wp-plugin" />
 		</properties>
-	</rule> -->
+	</rule>
 
 	<!-- 
 		####                   ####
@@ -44,7 +40,7 @@
 	<arg name="colors" />
 
 	<!-- Paraller file checking -->
-	<arg name="parallel" value="20" />
+	<arg name="parallel" value="10" />
 
     <!-- Show sniff codes in all reports -->
     <arg value="ns" />
@@ -56,10 +52,10 @@
 	-->
 
 	<!-- Minimum version of PHP required to run the plugin.  -->
-	<config name="testVersion" value="7.2-" />
+	<config name="testVersion" value="5.6-" />
 
 	<!-- Check PHP version compatibility. -->
-	<!-- <rule ref="PHPCompatibility" /> -->
+	<rule ref="PHPCompatibility" />
 
 	<!-- Allow tab indent  -->
 	<rule ref="Generic.WhiteSpace.DisallowTabIndent">
@@ -74,9 +70,6 @@
 	<rule ref="Generic.Arrays.DisallowShortArraySyntax">
 		<exclude name="Generic.Arrays.DisallowShortArraySyntax.Found" />
 	</rule>
-
-	<!-- Generic.Commenting -->
-	<rule ref="Generic.Commenting" />
 
 	<!-- Generic.CodeAnalysis -->
 	<rule ref="Generic.CodeAnalysis" />
@@ -145,8 +138,9 @@
 
     <config name="minimum_supported_wp_version" value="5.2" />
 
-    <!-- WordPress -->
-    <rule ref="WordPress" /> 
+    <!-- WordPress; WordPress Standard, Security, Files, Docs, Extra Everything -->
+    <rule ref="WordPress" />
+    <rule ref="WordPress" />
 
 	<!-- Allow short ternary (codition ? true : false) -->
 	<rule ref="WordPress.PHP.DisallowShortTernary.Found" />
@@ -156,7 +150,11 @@
 		<exclude name="WordPress.Files.FileName.InvalidClassFileName" />
 	</rule>
 
-	
+	<!-- exclude WordPress.PHP.StrictInArray.FoundNonStrictFalse -->
+	<rule ref="WordPress.PHP.StrictInArray">
+		<exclude name="WordPress.PHP.StrictInArray.FoundNonStrictFalse" />
+		<exclude name="WordPress.PHP.StrictInArray.MissingTrueStrict" />	
+	</rule>
 
 	<!-- 
 		####                     		      ####

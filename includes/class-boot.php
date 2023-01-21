@@ -7,14 +7,17 @@
  * @since 1.0.0
  */
 
+// Namespace.
+namespace WP_Plugin\Base;
+
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'WP_Plugin_Boot' ) ) {
+if ( ! class_exists( 'Boot' ) ) {
 	/**
-	 * Summary of WP_Plugin_Base.
+	 * Loads all the requires files, classes and functions of WP Plugin.
 	 */
-	class WP_Plugin_Boot {
+	class Boot {
 		/**
 		 * Instance of this class.
 		 *
@@ -94,10 +97,21 @@ if ( ! class_exists( 'WP_Plugin_Boot' ) ) {
 			if ( file_exists( __DIR__ . '/includes/classes/class-ajax.php' ) && wp_doing_ajax() ) {
 				require_once __DIR__ . '/includes/classes/class-ajax.php';
 			}
+
+			// Loads.
+		}
+
+		/**
+		 * Initializes the plugin.
+		 *
+		 * @return void
+		 */
+		public function init() {
+			// Initialize the plugin.
 		}
 	}
 
 	// Initialize the plugin.
-	WP_Plugin_Boot::instance();
+	Boot::instance();
 
 }

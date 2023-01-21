@@ -1,60 +1,63 @@
 <?php
+/** Handles all the ajax requests
+ *
+ * @package WP_Plugin
+ */
 
-namespace SameplPlugin;
+// Namespace.
+namespace WP_Plugin\Classes;
 
-defined('ABSPATH') or die('Direct Script not Allowed');
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists('\SameplPlugin\Ajax') ) {
+// Use base controller.
+use WP_Plugin\Base\Controller as Controller;
 
-	class Ajax {
 
-		// Singleton pattern
-		private static $instance = null;
-		public static function instance() {
-			if ( self::$instance == null ) {
-				self::$instance = new self();
+if ( ! class_exists('Ajax') ) {
+	/**
+	 * Handles all the ajax requests
+	 */
+	final class Ajax extends Controller {
+
+
+		use \WP_Plugin\Traits\Utilities;
+
+		/**
+		 * Returns all the ajax hooks
+		 *
+		 * @return array
+		 */
+		public function get_hooks() {
+			$hooks = [
+				'wp_plugin_first_ajax' => 'first_ajax_callback',
+			];
+
+			return $hooks;
+		}
+
+		/**
+		 * Registers all the ajax hooks
+		 *
+		 * @return void
+		 */
+		public function register_hooks() {
+			$hooks = $this->get_hooks();
+
+			foreach ( $hooks as $hook => $callback ) {
+				add_action( "wp_ajax_{$hook}", [ $this, $callback ] );
+				add_action( "wp_ajax_nopriv_{$hook}", [ $this, $callback ] );
 			}
-
-			return self::$instance;
 		}
 
-		// init ajax
-		function init() {
-			$this->verify_nonce();
-			$this->register_hooks();
+		/**
+		 * Ajax action hook starts here
+		 */
+		public function first_ajax_callback() {
+			// Check nonce.
+			check_ajax_referer( 'wp_plugin_first_ajax', 'nonce' );
+
+			$this->response()->json_success( 'Ajax request successful' );
 		}
-
-		// hooks register
-		function register_hooks() {
-			add_action('wp_ajax_sample_ajax_action', [ $this, 'sample_ajax_action' ]);
-		}
-
-		// restrict for only admin
-		function admin_only() {
-			if ( ! current_user_can( 'manage_options' ) ) {
-				wp_die('Invalid request');
-			}
-		}
-
-		// verify nonce
-		function verify_nonce() {
-			$inputs = App::inputs();
-
-			$nonce = sanitize_text_field( $inputs->nonce ?? $_REQUEST['nonce'] );
-
-			if ( ! wp_verify_nonce( $nonce, 'sample_plugin' ) ) {
-				wp_die ( 'No naughty business');
-			}
-		}
-
-		// ajax callback
-		public function sample_ajax_action() {
-			wp_send_json( 'Works' );
-		}
-
-	}
-	// load only when it's an ajax call
-	if ( wp_doing_ajax() ) {
-		Ajax::instance()->init();
 	}
 }

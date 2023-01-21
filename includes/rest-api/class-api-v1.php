@@ -1,66 +1,60 @@
 <?php
+/** Handles all the REST API requests for V1
+ *
+ * @package WP_Plugin
+ * @since 1.0.0
+ * @version v1
+ */
 
-namespace SamplePlugin;
+// Namespace.
+namespace WP_Plugin\Classes;
 
-defined('ABSPATH') or die('Direct Script not Allowed');
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists('\SamplePlugin\API') ) {
-	class API {
-
-
-		// Singleton pattern
-		private static $instance = null;
-
-		public static function instance() {
-			if ( self::$instance == null ) {
-				self::$instance = new self();
-			}
-
-			return self::$instance;
-		}
+// Use base controller.
+use WP_Plugin\Base\REST_API as REST_API;
+use \WP_REST_Request;
 
 
-		// init REST API
-		function init() {
-			add_action('rest_api_init', [ $this, 'enable_cors_origin' ], 0);
-			add_action('rest_pre_serve_request', [ $this, 'enable_cors_origin' ], 0);
-			add_action('rest_api_init', [ $this, 'register_custom_endpoints' ], 0);
-		}
-
-		// enable CORS
-		function enable_cors_origin() {
-			header('Access-Control-Allow-Origin: *');
-			header('Access-Control-Allow-Methods: *');
-			header('Access-Control-Allow-Credentials: true');
-			header('Content-Type: *');
-			header('Access-Control-Allow-Headers: Origin, Authorization, Content-Type, x-xsrf-token, x_csrftoken, Cache-Control, X-Requested-With');
-		}
-
-		// register endpoints
-		function register_custom_endpoints() {
-			$routes = [
-				// ROUTE,    METHODS,            CALLBACK,
-				[ 'test', [ 'GET', 'POST' ], 'test_rest_callback' ],
+if ( ! class_exists('API_V1') ) {
+	/**
+	 * Handles all the ajax requests
+	 */
+	final class API_V1 extends REST_API {
+		/**
+		 * Returns all the REST API endpoints
+		 *
+		 * @return array
+		 */
+		public function get_endpoints() {
+			$endpoints = [
+				[
+					'route'     => '/first-endpoint',
+					'methods'   => 'GET',
+					'callback'  => [ $this, 'first_endpoint_callback' ],
+				],
 			];
 
-			foreach ( $routes as $route ) {
-				register_rest_route('sample/v1', $route[0], [
-					'methods'  => $route[1],
-					'callback' => [ $this, $route[2] ],
-				]);
-			}
+			return $endpoints;
 		}
 
-		public function test_rest_callback() {
-			return new \WP_REST_Response([
-				'success' => true,
-				'data' => 'It works!',
-			]);
-		}
+		/**
+		 * Callback for the first endpoint
+		 *
+		 * @param WP_REST_Request $request The request object.
+		 */
+		public function first_endpoint_callback( $request ) {
+			// Get params.
+			$params = $request->get_params();
 
+			// Do something.
+
+			// Return response.
+			return $this->response()->rest_success( 'Success' );
+		}
 	}
 
-	// singleton instance
-	API::instance()->init();
-
+	// Instantiate.
+	API_V1::Init();
 }
