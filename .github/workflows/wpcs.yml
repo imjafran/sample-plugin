@@ -32,7 +32,8 @@ jobs:
         wget https://github.com/PHPCompatibility/PHPCompatibility/archive/develop.zip
         unzip develop.zip
         mv PHPCompatibility-develop ~/PHPCompatibility
-        phpcs --config-set installed_paths ~/wpcs,~/PHPCompatibility
+        PHPCS_PATH=pwd
+        phpcs --config-set installed_paths $PHPCS_PATH/wpcs,$PHPCS_PATH/PHPCompatibility
         
     - name: Loading PHPCS Configuration
       run: |
