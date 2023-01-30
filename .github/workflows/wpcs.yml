@@ -15,7 +15,7 @@ jobs:
     - name: Install PHP and dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y php7.4 php7.4-xml php7.4-mbstring
+        sudo apt-get install -y php7.4
         sudo apt-get install -y wp-cli
     
     - name: Install PHP Code Sniffer
