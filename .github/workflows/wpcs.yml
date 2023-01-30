@@ -38,9 +38,9 @@ jobs:
         
     - name: Loading PHPCS Configuration
       run: |
+        rm phpcs.xml
         wget -O phpcs.xml https://raw.githubusercontent.com/imjafran/wpcs/master/phpcs.xml
-        mv phpcs.xml ~/phpcs.xml
     
     - name: Run PHPCS
       run: |
-        phpcs --standard=/home/$USER/phpcs.xml --extensions=php .
+        phpcs .
