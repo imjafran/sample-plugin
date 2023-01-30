@@ -1,0 +1,16 @@
+name: Test WordPress Coding Standard
+
+on:
+  push:
+    branches: [ master, develop ]
+
+jobs:
+  test-wpcs:
+    runs-on: ubuntu-20.04
+    
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2
+      
+    - name: Run tests
+      uses: imjafran/wpcs@v1
