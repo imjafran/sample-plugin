@@ -34,7 +34,7 @@ jobs:
         unzip develop.zip
         rm develop.zip
         mv PHPCompatibility-develop ~/PHPCompatibility
-        phpcs --config-set installed_paths ~/WordPress-Coding-Standards,~/PHPCompatibility
+        phpcs --config-set installed_paths /Users/$USER/WordPress-Coding-Standards,/Users/$USER/PHPCompatibility
     
     - name: Run PHPCS
       run: |
