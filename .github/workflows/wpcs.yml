@@ -10,14 +10,14 @@ jobs:
     
     steps:
     - run: |
-        echo 'PHP 8.1 is built-in on Ubuntu 22.04, skipping PHP installation.'
+        echo 'PHP 7.4 is built-in on Ubuntu 20.04, skipping PHP installation.'
         
     - name: Checkout Code
       uses: actions/checkout@v2
     
     - name: Install PHP Code Sniffer
       run: |
-        wget https://github.com/squizlabs/PHP_CodeSniffer/releases/download/3.7.1/phpcs.phar
+        wget https://github.com/squizlabs/PHP_CodeSniffer/releases/download/3.6.1/phpcs.phar
         chmod +x phpcs.phar
         sudo mv phpcs.phar /usr/local/bin/phpcs
         
