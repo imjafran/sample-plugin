@@ -15,7 +15,7 @@ jobs:
     - name: Install Dependencies
       run: |
         # Installing PHP_CodeSniffers
-        wget https://github.com/squizlabs/PHP_CodeSniffer/releases/download/3.6.1/phpcs.phar
+        wget https://github.com/squizlabs/PHP_CodeSniffer/releases/download/3.7.1/phpcs.phar
         chmod +x phpcs.phar
         sudo mv phpcs.phar /usr/local/bin/phpcs
         # Installing WPCS
