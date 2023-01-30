@@ -1,0 +1,37 @@
+name: WordPress Coding Standard Test
+
+on:
+  push:
+    branches: [ develop ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+    
+    - name: Install PHP and dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y php7.4-cli php-xml php-mbstring
+        sudo apt-get install -y wp-cli
+    
+    - name: Install PHP Code Sniffer
+      run: |
+        wget https://github.com/squizlabs/PHP_CodeSniffer/releases/download/3.7.1/phpcs.phar
+        chmod +x phpcs.phar
+        sudo mv phpcs.phar /usr/local/bin/phpcs
+    
+    - name: Install WordPress Coding Standards
+      run: |
+        wget https://github.com/WordPress/WordPress-Coding-Standards/archive/master.zip
+        unzip master.zip
+        rm master.zip
+        mv WordPress-Coding-Standards-master ~/WordPress-Coding-Standards
+        phpcs --config-set installed_paths ~/WordPress-Coding-Standards
+    
+    - name: Test WordPress Coding Standards
+      run: |
+        phpcs --standard=WordPress --extensions=php .
