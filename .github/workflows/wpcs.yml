@@ -33,7 +33,12 @@ jobs:
         unzip develop.zip
         mv PHPCompatibility-develop ~/PHPCompatibility
         phpcs --config-set installed_paths ~/wpcs,~/PHPCompatibility
+        
+    - name: Loading PHPCS Configuration
+      run: |
+        wget -O phpcs.xml https://raw.githubusercontent.com/imjafran/wpcs/master/phpcs.xml
+        mv phpcs.xml ~/phpcs.xml
     
     - name: Run PHPCS
       run: |
-        phpcs --standard=WordPress --extensions=php .
+        phpcs --standard=~/phpcs.xml --extensions=php .
