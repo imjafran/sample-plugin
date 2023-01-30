@@ -43,4 +43,4 @@ jobs:
     
     - name: Run PHPCS
       run: |
-        phpcs --standard=~/phpcs.xml --extensions=php .
+        phpcs --standard=/home/$USER/phpcs.xml --extensions=php .
