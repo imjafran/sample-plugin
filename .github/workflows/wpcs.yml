@@ -25,16 +25,14 @@ jobs:
       run: |
         wget https://github.com/WordPress/WordPress-Coding-Standards/archive/master.zip
         unzip master.zip
-        rm master.zip
-        mv WordPress-Coding-Standards-master ~/WordPress-Coding-Standards
+        mv WordPress-Coding-Standards-master ~/wpcs
         
     - name: Install PHPCompatiblity
       run: |
         wget https://github.com/PHPCompatibility/PHPCompatibility/archive/develop.zip
         unzip develop.zip
-        rm develop.zip
         mv PHPCompatibility-develop ~/PHPCompatibility
-        phpcs --config-set installed_paths /Users/$USER/WordPress-Coding-Standards,/Users/$USER/PHPCompatibility
+        phpcs --config-set installed_paths ~/wpcs,~/PHPCompatibility
     
     - name: Run PHPCS
       run: |
