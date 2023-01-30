@@ -11,17 +11,20 @@ jobs:
     strategy:
       matrix:
         php-version: [$PHP_VERSION]
-    name: PHP ${{ matrix.php-version }} WPCS Check
+    name: PHP WPCS Check
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
-    - name: Set up PHP
+      
+    - name: Setup PHP
       uses: shivammathur/setup-php@v2
       with:
-        php-version: ${{ matrix.php-version }}
+        php-version: '7.4'
+
     - name: Install dependencies
       run: |
         composer install
+        
     - name: Run WPCS checks
       run: |
-        ./vendor/bin/phpcs . --standard=./vendor/wp-coding-standards/wpcs/WordPress
+        ./vendor/bin/phpcs . --standard=WordPress
