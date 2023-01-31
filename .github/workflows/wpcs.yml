@@ -35,7 +35,7 @@ jobs:
     - name: Configure Standards
       run: |
         rm phpcs.xml
-        wget -O phpcs.xml hhttps://raw.githubusercontent.com/WPPOOL/wppool-coding-standard/main/phpcs.xml
+        wget -O phpcs.xml https://raw.githubusercontent.com/WPPOOL/wppool-coding-standard/main/phpcs.xml
     
     - name: Run Tests
       run: |
