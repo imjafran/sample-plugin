@@ -1,17 +1,17 @@
-name: Test WordPress Coding Standard
+name: Test WordPress Coding Standard v2
 
 on:
-    push:
-        branches: [master, develop]
+  push:
+    branches: [master, develop]
 
 jobs:
-    test-wpcs:
-        runs-on: ubuntu-20.04
+  test-wpcs:
+    runs-on: ubuntu-20.04
 
-        steps:
-            - uses: actions/checkout@v3
-            - id: foo
-              uses: imjafran/wpcs@v1
-              with:
-                php: '7.4'
-                text-domain: 'scf'
+    steps:
+      - uses: actions/checkout@v3
+      - id: foo
+        uses: imjafran/wpcs@v1
+        with:
+          php: '7.4'
+          text-domain: 'scf'
