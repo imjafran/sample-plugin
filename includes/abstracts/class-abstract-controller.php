@@ -11,7 +11,7 @@
 namespace WP_Plugin\Base;
 
 // Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+defined( 'ABSPATH' ) || exit(1);
 
 if ( ! class_exists( 'Controller' ) ) {
 
@@ -31,12 +31,43 @@ if ( ! class_exists( 'Controller' ) ) {
 		 *
 		 * @return self
 		 */
-		public static function Instance() { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.MethodNameInvalid
+		public static function get_instance() {
 			if ( ! static::$instance ) {
 				static::$instance = new static();
 			}
 			return static::$instance;
 		}
+
+		/**
+		 * Initializes the class
+		 *
+		 * @return void
+		 */
+		public function init() {
+			$instance = static::get_instance();
+			$instance->register_hooks();
+		}
+
+		/**
+		 * Registers all the hooks
+		 *
+		 * @return void
+		 */
+		abstract public function register_hooks();
+
+		/**
+		 * Adds all the action hooks
+		 *
+		 * @return void
+		 */
+		abstract public function add_actions();
+
+		/**
+		 * Adds all the filter hooks
+		 *
+		 * @return void
+		 */
+		abstract public function add_filters();
 
 		/**
 		 * Returns the plugin slug for the plugin file

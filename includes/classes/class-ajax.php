@@ -8,7 +8,7 @@
 namespace WP_Plugin\Classes;
 
 // Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+defined( 'ABSPATH' ) || exit(1);
 
 // Use base controller.
 use WP_Plugin\Base\Controller as Controller;
@@ -30,7 +30,7 @@ if ( ! class_exists('Ajax') ) {
 		 */
 		public function get_hooks() {
 			$hooks = [
-				'wp_plugin_first_ajax' => 'first_ajax_callback',
+				'wp_ajax_wp_plugin_first_ajax' => 'first_ajax_callback',
 			];
 
 			return $hooks;
@@ -45,8 +45,7 @@ if ( ! class_exists('Ajax') ) {
 			$hooks = $this->get_hooks();
 
 			foreach ( $hooks as $hook => $callback ) {
-				add_action( "wp_ajax_{$hook}", [ $this, $callback ] );
-				add_action( "wp_ajax_nopriv_{$hook}", [ $this, $callback ] );
+				add_action( $hook, [ $this, $callback ], 10, 0 );
 			}
 		}
 

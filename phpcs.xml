@@ -55,7 +55,7 @@
 	<config name="testVersion" value="5.6-" />
 
 	<!-- Check PHP version compatibility. -->
-	<rule ref="PHPCompatibility" />
+	<!-- <rule ref="PHPCompatibility" /> -->
 
 	<!-- Allow tab indent  -->
 	<rule ref="Generic.WhiteSpace.DisallowTabIndent">

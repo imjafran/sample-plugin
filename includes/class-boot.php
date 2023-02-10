@@ -11,7 +11,7 @@
 namespace WP_Plugin\Base;
 
 // Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+defined( 'ABSPATH' ) || exit(1);
 
 if ( ! class_exists( 'Boot' ) ) {
 	/**

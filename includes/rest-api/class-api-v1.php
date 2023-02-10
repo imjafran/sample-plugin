@@ -10,7 +10,7 @@
 namespace WP_Plugin\Classes;
 
 // Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+defined( 'ABSPATH' ) || exit(1);
 
 // Use base controller.
 use WP_Plugin\Base\REST_API as REST_API;

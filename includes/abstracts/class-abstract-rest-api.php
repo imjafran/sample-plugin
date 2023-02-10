@@ -9,7 +9,7 @@
 namespace WP_Plugin\Base;
 
 // Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+defined( 'ABSPATH' ) || exit(1);
 
 // Use base controller.
 use WP_Plugin\Base\Controller as Controller;

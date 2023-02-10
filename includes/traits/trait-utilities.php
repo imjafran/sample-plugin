@@ -11,7 +11,7 @@
 namespace WP_Plugin\Traits;
 
 // Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+defined( 'ABSPATH' ) || exit(1);
 
 // Use classes.
 use WP_Plugin\Classes\Input as Input;
