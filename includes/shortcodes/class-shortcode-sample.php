@@ -1,66 +1,43 @@
 <?php
 
-namespace SamplePlugin;
+/**
+ * Shortcode Sample Class File.
+ *
+ * @package WP_Plugin
+ */
 
-defined('ABSPATH') or die('Direct Script not Allowed');
+// Namespace.
+namespace WP_Plugin\Shortcodes;
 
-if ( ! class_exists('\SamplePlugin\API') ) {
-	class API {
+// Exit if accessed directly.
+defined('ABSPATH') || exit(1);
 
+// Use base controller.
+use WP_Plugin\Base\Controller as Controller;
 
-		// Singleton pattern
-		private static $instance = null;
+if ( ! class_exists( __NAMESPACE__ . '\Sample' ) ) {
+	/**
+	 * Sample Shortcode class.
+	 */
+	final class Sample extends Controller {
 
-		public static function instance() {
-			if ( self::$instance == null ) {
-				self::$instance = new self();
-			}
-
-			return self::$instance;
+		/**
+		 * Registers shortcode
+		 *
+		 * @return void
+		 */
+		public function register_hooks() {
+			add_shortcode('wp_plugin_sample_shortcode', [ $this, 'sample_shortcode' ]);
 		}
 
-
-		// init REST API
-		function init() {
-			add_action('rest_api_init', [ $this, 'enable_cors_origin' ], 0);
-			add_action('rest_pre_serve_request', [ $this, 'enable_cors_origin' ], 0);
-			add_action('rest_api_init', [ $this, 'register_custom_endpoints' ], 0);
+		/**
+		 * Sample shortcode function.
+		 */
+		public function sample_shortcode() {
+			return 'Sample shortcode';
 		}
-
-		// enable CORS
-		function enable_cors_origin() {
-			header('Access-Control-Allow-Origin: *');
-			header('Access-Control-Allow-Methods: *');
-			header('Access-Control-Allow-Credentials: true');
-			header('Content-Type: *');
-			header('Access-Control-Allow-Headers: Origin, Authorization, Content-Type, x-xsrf-token, x_csrftoken, Cache-Control, X-Requested-With');
-		}
-
-		// register endpoints
-		function register_custom_endpoints() {
-			$routes = [
-				// ROUTE,    METHODS,            CALLBACK,
-				[ 'test', [ 'GET', 'POST' ], 'test_rest_callback' ],
-			];
-
-			foreach ( $routes as $route ) {
-				register_rest_route('sample/v1', $route[0], [
-					'methods'  => $route[1],
-					'callback' => [ $this, $route[2] ],
-				]);
-			}
-		}
-
-		public function test_rest_callback() {
-			return new \WP_REST_Response([
-				'success' => true,
-				'data' => 'It works!',
-			]);
-		}
-
 	}
 
-	// singleton instance
-	API::instance()->init();
-
+	// Initialize the class.
+	Sample::init();
 }

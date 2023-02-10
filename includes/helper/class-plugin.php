@@ -9,7 +9,7 @@
 namespace WP_Plugin\Classes;
 
 // Exit if accessed directly.
-defined( 'ABSPATH' ) || exit(1);
+defined('ABSPATH') || exit(1);
 
 if ( ! class_exists('Plugin') ) {
 	/**
@@ -26,8 +26,10 @@ if ( ! class_exists('Plugin') ) {
 
 		/**
 		 * Constructor.
+		 *
+		 * @param string $file Plugin file.
 		 */
-		public function __construct( $file = null) {
+		public function __construct( $file = null ) {
 			$this->file = $file ? $file : __FILE__;
 		}
 
@@ -43,21 +45,21 @@ if ( ! class_exists('Plugin') ) {
 		/**
 		 * Get plugin directory.
 		 *
-		 * @param string $append Append to directory.
+		 * @param  string $append Append to directory.
 		 * @return string
 		 */
 		public function get_dir( $append = '' ) {
-			return plugin_dir_path ( $this->get_file() ) . $append;
+			return plugin_dir_path($this->get_file()) . $append;
 		}
 
 		/**
 		 * Get plugin URL.
 		 *
-		 * @param string $append Append to URL.
+		 * @param  string $append Append to URL.
 		 * @return string
 		 */
 		public function get_url( $append = '' ) {
-			return plugin_dir_url ( $this->get_file() ) . $append;
+			return plugin_dir_url($this->get_file()) . $append;
 		}
 
 		/**
@@ -66,7 +68,7 @@ if ( ! class_exists('Plugin') ) {
 		 * @return string
 		 */
 		public function get_basename() {
-			return plugin_basename( $this->get_file() );
+			return plugin_basename($this->get_file());
 		}
 
 		/**
@@ -75,7 +77,7 @@ if ( ! class_exists('Plugin') ) {
 		 * @return string
 		 */
 		public function get_slug() {
-			return dirname( $this->get_basename() );
+			return dirname($this->get_basename());
 		}
 
 		/**
@@ -84,17 +86,19 @@ if ( ! class_exists('Plugin') ) {
 		 * @return string
 		 */
 		public function get_data() {
-			return get_file_data( $this->get_file(), [
-				'name'        => 'Plugin Name',
-				'version'     => 'Version',
-				'description' => 'Description',
-				'author'      => 'Author',
-				'author_uri'  => 'Author URI',
-				'text_domain' => 'Text Domain',
-				'domain_path' => 'Domain Path',
-				'network'     => 'Network',
-			] );
+			return get_file_data(
+				$this->get_file(), [
+					'name'        => 'Plugin Name',
+					'version'     => 'Version',
+					'description' => 'Description',
+					'author'      => 'Author',
+					'author_uri'  => 'Author URI',
+					'text_domain' => 'Text Domain',
+					'domain_path' => 'Domain Path',
+					'network'     => 'Network',
+				]
+			);
 		}
-		
+
 	}
 }

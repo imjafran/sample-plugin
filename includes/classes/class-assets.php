@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Input Class File.
+ * Frontend Assets Class File.
  *
  * @package WP_Plugin
  */
@@ -9,66 +10,33 @@
 namespace WP_Plugin\Classes;
 
 // Exit if accessed directly.
-defined( 'ABSPATH' ) || exit(1);
+defined('ABSPATH') || exit(1);
 
-if ( ! class_exists('Input') ) {
+// Use base controller.
+use WP_Plugin\Base\Controller as Controller;
+
+if ( ! class_exists( __NAMESPACE__ . '\Assets' ) ) {
 	/**
-	 * Input class.
+	 * Frontend Assets class.
 	 */
-	final class Input {
+	final class Assets extends Controller {
 
 		/**
-		 * Get all input data.
+		 * Registers enqueues all the assets
 		 *
-		 * @access protected
-		 * @return mixed
+		 * @return void
 		 */
-		protected function all() {
-			$inputs = wp_remote_get( 'php://input' );
-			if ( ! is_wp_error( $inputs ) ) {
-				$inputs = json_decode( sanitize_text_field( wp_unslash( $inputs['body'] ) ), true );
-
-				if ( ! empty( $inputs ) ) {
-					return $inputs;
-				}
-			}
-
-			return $_REQUEST; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Nonce checked where it's used.
+		public function register_hooks() {
+			add_action('wp_enqueue_scripts', [ $this, 'enqueue_assets' ]);
 		}
 
 		/**
-		 * Sanitized mixed data recursively.
-		 *
-		 * @param mixed $array Data to sanitize.
-		 * @return mixed
+		 * Enqueues all the assets
 		 */
-		public function sanitize( $array = [] ) {
-			if ( is_array( $array ) ) {
-				foreach ( $array as $key => $value ) {
-					$array[ $key ] = $this->sanitize( $value );
-				}
-			} else {
-				$array = sanitize_text_field( $array );
-			}
+		public function enqueue_assets() {
 
-			return $array;
-		}
-
-		/**
-		 * Get input data.
-		 *
-		 * @param string $key     Key to get.
-		 * @param string $default Default value.
-		 * @return mixed
-		 */
-		public function get( $key, $default = '' ) {
-			$inputs = $this->all();
-
-			if ( isset( $inputs[ $key ] ) ) {
-				return $this->sanitize( $inputs[ $key ] );
-			}
-
-			return $this->sanitize( $default );
 		}
 	}
+
+	Assets::init();
 }

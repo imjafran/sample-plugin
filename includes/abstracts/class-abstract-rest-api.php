@@ -1,22 +1,22 @@
 <?php
-/** Handles all the REST API requests
+
+/**
+ * Handles all the REST API requests
  *
  * @package WP_Plugin
- * @since 1.0.0
+ * @since   1.0.0
  */
 
 // Namespace.
 namespace WP_Plugin\Base;
 
 // Exit if accessed directly.
-defined( 'ABSPATH' ) || exit(1);
+defined('ABSPATH') || exit(1);
 
 // Use base controller.
 use WP_Plugin\Base\Controller as Controller;
-use \WP_REST_Request;
 
-
-if ( ! class_exists('REST_API') ) {
+if ( ! class_exists( __NAMESPACE__ . '\REST_API' ) ) {
 	/**
 	 * Handles all the REST API requests
 	 */
@@ -33,6 +33,27 @@ if ( ! class_exists('REST_API') ) {
 		protected $namespace = 'wp-plugin/v1';
 
 		/**
+		 * Sets the namespace of the REST API
+		 *
+		 * @param  string $namespace Namespace of the REST API.
+		 * @return self
+		 */
+		public function set_namespace( $namespace = '' ) {
+			$this->namespace = $namespace;
+
+			return $this;
+		}
+
+		/**
+		 * Returns the namespace of the REST API
+		 *
+		 * @return string
+		 */
+		public function get_namespace() {
+			return trim($this->namespace, '/');
+		}
+
+		/**
 		 * Checks permission for the REST API request
 		 *
 		 * @return boolean
@@ -42,18 +63,77 @@ if ( ! class_exists('REST_API') ) {
 		}
 
 		/**
-		 * Returns all the REST API endpoints
+		 * Returns endpoints
 		 *
 		 * @return array
 		 */
-		public function get_endpoints() {
+		public function endpoints() {
 			$endpoints = [
+				'first_endpoint' => 'first_endpoint_callback',
 				[
-					'route'     => '/first-endpoint',
-					'methods'   => 'GET',
-					'callback'  => [ $this, 'first_endpoint_callback' ],
+					'route'    => '/second-endpoint',
+					'methods'  => 'GET',
+					'callback' => [ $this, 'second_endpoint_callback' ],
 				],
 			];
+
+			return $endpoints;
+		}
+
+		/**
+		 * Returns all the REST API endpoints formatted for registering
+		 *
+		 * @return array
+		 */
+		protected function get_endpoints() {
+			$endpoints = $this->endpoints();
+
+			// Format if needed.
+			foreach ( $endpoints as $key => $value ) {
+				if ( is_string($value) ) {
+					$endpoints[] = [
+						'route'               => '/' . trim( $key, '/' ),
+						'methods'             => 'GET',
+						'permission_callback' => [ $this, 'is_allowed' ],
+						'callback'            => [ $this, $value ],
+					];
+				} elseif ( is_array($value) ) {
+
+					if ( ! is_callable( $value) ) {
+						$endpoints[] = [
+							'route'               => isset($value['route'])
+								? $value['route']
+								: '/' . trim($key, '/'),
+							'methods'             => isset($value['methods'])
+								? $value['methods']
+								: 'GET',
+							'permission_callback' => isset(
+								$value['permission_callback']
+							)
+								? $value['permission_callback']
+								: [ $this, 'is_allowed' ],
+							'callback'            =>
+							isset($value['callback']) &&
+								is_callable($value['callback'])
+								? $value['callback']
+								: [ $this, $key . '_callback' ],
+						];
+					} else {
+						$endpoints[] = [
+							'route'               => isset( $key )
+								? '/' . trim( $key, '/' )
+								: '/',
+							'methods'             => isset( $value['methods'] )
+								? $value['methods']
+								: 'GET',
+							'permission_callback' => isset( $value['permission_callback'] )
+								? $value['permission_callback']
+								: [ $this, 'is_allowed' ],
+							'callback'            => $value,
+						];
+					}
+				}
+			}
 
 			return $endpoints;
 		}
@@ -63,9 +143,8 @@ if ( ! class_exists('REST_API') ) {
 		 *
 		 * @return void
 		 */
-		public static function Init() {
-			$static = new static();
-			add_action( 'rest_api_init', [ $static, 'register_rest_endpoints' ] );
+		public function add_actions() {
+			add_action('rest_api_init', [ $this, 'register_rest_endpoints' ]);
 		}
 
 		/**
@@ -77,13 +156,12 @@ if ( ! class_exists('REST_API') ) {
 			$endpoints = $this->get_endpoints();
 
 			foreach ( $endpoints as $endpoint ) {
-				register_rest_route( $this->namespace, $endpoint['route'], [
-					'methods'  => $endpoint['methods'],
-					'callback' => $endpoint['callback'],
-					'permission_callback' => [ $this, 'is_allowed' ],
-				] );
+				register_rest_route($this->namespace, $endpoint['route'], [
+					'methods'             => $endpoint['methods'],
+					'callback'            => $endpoint['callback'],
+					'permission_callback' => $endpoint['permission_callback'],
+				]);
 			}
 		}
 	}
-
 }

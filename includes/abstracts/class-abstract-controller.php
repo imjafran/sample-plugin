@@ -4,16 +4,16 @@
  * Abstract Base Class
  *
  * @package WP_Plugin
- * @since 1.0.0
+ * @since   1.0.0
  */
 
 // Namespace.
 namespace WP_Plugin\Base;
 
 // Exit if accessed directly.
-defined( 'ABSPATH' ) || exit(1);
+defined( 'ABSPATH' ) || exit( 1 );
 
-if ( ! class_exists( 'Controller' ) ) {
+if ( ! class_exists( __NAMESPACE__ . '\Controller' ) ) {
 
 	/**
 	 * Base abstract class of the plugin, contains all the common methods
@@ -43,7 +43,7 @@ if ( ! class_exists( 'Controller' ) ) {
 		 *
 		 * @return void
 		 */
-		public function init() {
+		public static function init() {
 			$instance = static::get_instance();
 			$instance->register_hooks();
 		}
@@ -53,29 +53,27 @@ if ( ! class_exists( 'Controller' ) ) {
 		 *
 		 * @return void
 		 */
-		abstract public function register_hooks();
+		public function register_hooks() {
+			$this->add_actions();
+			$this->add_filters();
+		}
 
 		/**
 		 * Adds all the action hooks
 		 *
 		 * @return void
 		 */
-		abstract public function add_actions();
+		public function add_actions() {
+
+		}
 
 		/**
 		 * Adds all the filter hooks
 		 *
 		 * @return void
 		 */
-		abstract public function add_filters();
+		public function add_filters() {
 
-		/**
-		 * Returns the plugin slug for the plugin file
-		 *
-		 * @return string
-		 */
-		public function get_plugin_slug() {
-			return basename( dirname( dirname( SAMPLE_PLUGIN ) ) );
 		}
 	}
 }

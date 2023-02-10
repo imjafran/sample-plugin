@@ -4,20 +4,21 @@
  * Loads all the requires files, classes and functions of WP Plugin.
  *
  * @package WP_Plugin
- * @since 1.0.0
+ * @since   1.0.0
  */
 
 // Namespace.
 namespace WP_Plugin\Base;
 
 // Exit if accessed directly.
-defined( 'ABSPATH' ) || exit(1);
+defined('ABSPATH') || exit(1);
 
-if ( ! class_exists( 'Boot' ) ) {
+if ( ! class_exists('Boot') ) {
 	/**
 	 * Loads all the requires files, classes and functions of WP Plugin.
 	 */
 	class Boot {
+
 		/**
 		 * Instance of this class.
 		 *
@@ -54,17 +55,17 @@ if ( ! class_exists( 'Boot' ) ) {
 		public function includes() {
 			// Loading composer files.
 			if ( file_exists(__DIR__ . '/vendor/autoload.php') ) {
-				require_once __DIR__ . '/vendor/autoload.php';
+				include_once __DIR__ . '/vendor/autoload.php';
 			}
 
 			// Core functions.
-			if ( file_exists( __DIR__ . '/functions.php' ) ) {
-				require_once __DIR__ . '/functions.php';
+			if ( file_exists(__DIR__ . '/other/functions.php') ) {
+				include_once __DIR__ . '/other/functions.php';
 			}
 
 			// Core traits.
-			if ( file_exists( __DIR__ . '/includes/traits/traits-app.php' ) ) {
-				require_once __DIR__ . '/includes/traits/traits-app.php';
+			if ( file_exists(__DIR__ . '/includes/traits/traits-app.php') ) {
+				include_once __DIR__ . '/includes/traits/traits-app.php';
 			}
 
 			$this->include_admin_files();
@@ -82,8 +83,8 @@ if ( ! class_exists( 'Boot' ) ) {
 			}
 
 			// Admin files.
-			if ( file_exists( __DIR__ . '/admin/class-admin.php' ) ) {
-				require_once __DIR__ . '/admin/class-admin.php';
+			if ( file_exists(__DIR__ . '/admin/class-admin.php') ) {
+				include_once __DIR__ . '/admin/class-admin.php';
 			}
 		}
 
@@ -94,8 +95,8 @@ if ( ! class_exists( 'Boot' ) ) {
 		 */
 		public function include_files() {
 			// Loads ajax when it's an ajax request.
-			if ( file_exists( __DIR__ . '/includes/classes/class-ajax.php' ) && wp_doing_ajax() ) {
-				require_once __DIR__ . '/includes/classes/class-ajax.php';
+			if ( file_exists(__DIR__ . '/includes/classes/class-ajax.php') && wp_doing_ajax() ) {
+				include_once __DIR__ . '/includes/classes/class-ajax.php';
 			}
 
 			// Loads.

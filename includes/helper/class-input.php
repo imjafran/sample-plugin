@@ -9,7 +9,7 @@
 namespace WP_Plugin\Classes;
 
 // Exit if accessed directly.
-defined( 'ABSPATH' ) || exit(1);
+defined('ABSPATH') || exit(1);
 
 if ( ! class_exists('Input') ) {
 	/**
@@ -24,11 +24,11 @@ if ( ! class_exists('Input') ) {
 		 * @return mixed
 		 */
 		protected function all() {
-			$inputs = wp_remote_get( 'php://input' );
-			if ( ! is_wp_error( $inputs ) ) {
-				$inputs = json_decode( sanitize_text_field( wp_unslash( $inputs['body'] ) ), true );
+			$inputs = wp_remote_get('php://input');
+			if ( ! is_wp_error($inputs) ) {
+				$inputs = json_decode(sanitize_text_field(wp_unslash($inputs['body'])), true);
 
-				if ( ! empty( $inputs ) ) {
+				if ( ! empty($inputs) ) {
 					return $inputs;
 				}
 			}
@@ -39,16 +39,16 @@ if ( ! class_exists('Input') ) {
 		/**
 		 * Sanitized mixed data recursively.
 		 *
-		 * @param mixed $array Data to sanitize.
+		 * @param  mixed $array Data to sanitize.
 		 * @return mixed
 		 */
 		public function sanitize( $array = [] ) {
-			if ( is_array( $array ) ) {
+			if ( is_array($array) ) {
 				foreach ( $array as $key => $value ) {
-					$array[ $key ] = $this->sanitize( $value );
+					$array[ $key ] = $this->sanitize($value);
 				}
 			} else {
-				$array = sanitize_text_field( $array );
+				$array = sanitize_text_field($array);
 			}
 
 			return $array;
@@ -57,18 +57,18 @@ if ( ! class_exists('Input') ) {
 		/**
 		 * Get input data.
 		 *
-		 * @param string $key     Key to get.
-		 * @param string $default Default value.
+		 * @param  string $key     Key to get.
+		 * @param  string $default Default value.
 		 * @return mixed
 		 */
 		public function get( $key, $default = '' ) {
 			$inputs = $this->all();
 
-			if ( isset( $inputs[ $key ] ) ) {
-				return $this->sanitize( $inputs[ $key ] );
+			if ( isset($inputs[ $key ]) ) {
+				return $this->sanitize($inputs[ $key ]);
 			}
 
-			return $this->sanitize( $default );
+			return $this->sanitize($default);
 		}
 	}
 }
