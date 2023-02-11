@@ -1,15 +1,15 @@
 <?php
 /**
  * Plugin Name:     WP Plugin
- * Plugin URI:         https://github.com/imjafran/wp-plugin
+ * Plugin URI:      https://github.com/imjafran/sample-plugin
  * Description:     Clean WordPress plugin starter pack
  * Version:         1.0.0
- * Author:             imjafran
- * Author URI:         https://github.com/imjafran
- * License:         IT
- * Text Domain:     wp-plugin
+ * Author:          imjafran
+ * Author URI:      https://github.com/imjafran
+ * License:         MIT
+ * Text Domain:     sample-plugin
  *
- * @package WP_Plugin
+ * @package SamplePlugin
  * @since   1.0.0
  */
 
@@ -17,12 +17,19 @@
 defined('ABSPATH') || exit();
 
 
-// Defining root handler.
-define('SAMPLE_PLUGIN', __FILE__);
+if ( ! defined( 'SAMPLE_PLUGIN_FILE' ) ) {
 
-// Load Bootstrap file.
-require_once __DIR__ . '/includes/boot.php';
+	// Defining root handler.
+	define( 'SAMPLE_PLUGIN_FILE', __FILE__ );
+
+	// Defining version.
+	define( 'SAMPLE_PLUGIN_VERSION', '1.0.0' );
+
+	// Load Bootstrap file.
+	require_once __DIR__ . '/includes/class-boot.php';
+}
+
 
 /**
- * The main function responsible for returning the one true WP_Plugin
+ * The main function responsible for returning the one true SamplePlugin
  */

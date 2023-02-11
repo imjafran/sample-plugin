@@ -3,17 +3,17 @@
 /**
  * Admin Menus Class File.
  *
- * @package WP_Plugin
+ * @package SamplePlugin
  */
 
 // Namespace.
-namespace WP_Plugin\Admin\Menus;
+namespace SamplePlugin\Admin\Menus;
 
 // Exit if accessed directly.
 defined('ABSPATH') || exit(1);
 
 // Use base controller.
-use WP_Plugin\Base\Controller as Controller;
+use SamplePlugin\Base\Controller as Controller;
 
 if ( ! class_exists( __NAMESPACE__ . '\Assets' ) ) {
 	/**

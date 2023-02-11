@@ -3,16 +3,16 @@
 /**
  * Options Class File.
  *
- * @package WP_Plugin
+ * @package SamplePlugin
  */
 
 // Namespace.
-namespace WP_Plugin\Classes;
+namespace SamplePlugin\Helper\Classes;
 
 // Exit if accessed directly.
 defined('ABSPATH') || exit(1);
 
-if ( ! class_exists('Options') ) {
+if ( ! class_exists( __NAMESPACE__ . '\Options') ) {
 	/**
 	 * Options class.
 	 */
@@ -23,7 +23,7 @@ if ( ! class_exists('Options') ) {
 		 *
 		 * @var string
 		 */
-		private $prefix = 'ssgsw_';
+		private $prefix = 'sample_plugin_';
 
 		/**
 		 * Set prefix of the option.

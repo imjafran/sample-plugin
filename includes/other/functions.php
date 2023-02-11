@@ -2,8 +2,8 @@
 /**
  * Non object-oriented functions for WP Plugin.
  *
- * @package WP_Plugin
+ * @package SamplePlugin
  */
 
 // Exit if accessed directly.
-defined('ABSPATH') || exit();
+defined('ABSPATH') || exit(1);

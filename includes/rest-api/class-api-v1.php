@@ -2,23 +2,23 @@
 /**
  * Handles all the REST API requests for V1
  *
- * @package WP_Plugin
+ * @package SamplePlugin
  * @since   1.0.0
  * @version v1
  */
 
 // Namespace.
-namespace WP_Plugin\Classes;
+namespace SamplePlugin\Classes;
 
 // Exit if accessed directly.
 defined('ABSPATH') || exit(1);
 
 // Use base controller.
-use WP_Plugin\Base\REST_API as REST_API;
+use SamplePlugin\Base\REST_API as REST_API;
 use \WP_REST_Request;
 
 
-if ( ! class_exists('API_V1') ) {
+if ( ! class_exists( __NAMESPACE__ . '\'API_V1') ) {
 	/**
 	 * Handles all the ajax requests
 	 */
@@ -49,7 +49,7 @@ if ( ! class_exists('API_V1') ) {
 			// Do something.
 
 			// Return response.
-			return $this->response()->rest_success('Success');
+			return $this->response->rest_success('Success');
 		}
 	}
 

@@ -2,16 +2,16 @@
 /**
  * Input Class File.
  *
- * @package WP_Plugin
+ * @package SamplePlugin
  */
 
 // Namespace.
-namespace WP_Plugin\Classes;
+namespace SamplePlugin\Helper\Classes;
 
 // Exit if accessed directly.
 defined('ABSPATH') || exit(1);
 
-if ( ! class_exists('Input') ) {
+if ( ! class_exists( __NAMESPACE__ . '\Input') ) {
 	/**
 	 * Input class.
 	 */

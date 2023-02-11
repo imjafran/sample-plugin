@@ -3,12 +3,12 @@
 /**
  * Abstract Base Class
  *
- * @package WP_Plugin
+ * @package SamplePlugin
  * @since   1.0.0
  */
 
 // Namespace.
-namespace WP_Plugin\Base;
+namespace SamplePlugin\Base;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit( 1 );

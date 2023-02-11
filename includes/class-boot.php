@@ -3,17 +3,17 @@
  * WP Plugin Bootstrap
  * Loads all the requires files, classes and functions of WP Plugin.
  *
- * @package WP_Plugin
+ * @package SamplePlugin
  * @since   1.0.0
  */
 
 // Namespace.
-namespace WP_Plugin\Base;
+namespace SamplePlugin\Base;
 
 // Exit if accessed directly.
 defined('ABSPATH') || exit(1);
 
-if ( ! class_exists('Boot') ) {
+if ( ! class_exists( __NAMESPACE__ . '\'Boot') ) {
 	/**
 	 * Loads all the requires files, classes and functions of WP Plugin.
 	 */

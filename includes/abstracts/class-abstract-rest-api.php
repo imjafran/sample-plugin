@@ -3,18 +3,18 @@
 /**
  * Handles all the REST API requests
  *
- * @package WP_Plugin
+ * @package SamplePlugin
  * @since   1.0.0
  */
 
 // Namespace.
-namespace WP_Plugin\Base;
+namespace SamplePlugin\Base;
 
 // Exit if accessed directly.
 defined('ABSPATH') || exit(1);
 
 // Use base controller.
-use WP_Plugin\Base\Controller as Controller;
+use SamplePlugin\Base\Controller as Controller;
 
 if ( ! class_exists( __NAMESPACE__ . '\REST_API' ) ) {
 	/**
@@ -23,14 +23,14 @@ if ( ! class_exists( __NAMESPACE__ . '\REST_API' ) ) {
 	abstract class REST_API extends Controller {
 
 
-		use \WP_Plugin\Traits\Utilities;
+		use \SamplePlugin\Traits\Utilities;
 
 		/**
 		 * Namespace of the REST API
 		 *
 		 * @var string
 		 */
-		protected $namespace = 'wp-plugin/v1';
+		protected $namespace = 'sample-plugin/v1';
 
 		/**
 		 * Sets the namespace of the REST API

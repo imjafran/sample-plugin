@@ -1,5 +1,5 @@
 {
-  "name": "wp-plugin-boilerplate",
+  "name": "sample-plugin-boilerplate",
   "version": "1.0.0",
   "description": "WP Plugin Boilerplate by Jafran Hasan",
   "main": "src/js/admin.js",
@@ -12,15 +12,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/imjafran/wp-plugin-boilerplate.git"
+    "url": "git+https://github.com/imjafran/sample-plugin-boilerplate.git"
   },
   "keywords": [],
   "author": "imjafran",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/imjafran/wp-plugin-boilerplate/issues"
+    "url": "https://github.com/imjafran/sample-plugin-boilerplate/issues"
   },
-  "homepage": "https://github.com/imjafran/wp-plugin-boilerplate#readme",
+  "homepage": "https://github.com/imjafran/sample-plugin-boilerplate#readme",
   "devDependencies": {
     "autoprefixer": "^10.4.0",
     "postcss": "^8.4.4",

@@ -7123,7 +7123,7 @@ PHPCBF CAN FIX THE 1 MARKED SNIFF VIOLATIONS AUTOMATICALLY
 ------------------------------------------------------------------------------------------------------------
 
 
-FILE: /home/jafran/Local Sites/appdets/app/public/wp-content/plugins/sample-plugin/wp-plugin.php
+FILE: /home/jafran/Local Sites/appdets/app/public/wp-content/plugins/sample-plugin/sample-plugin.php
 ------------------------------------------------------------------------------------------------
 FOUND 8 ERRORS AFFECTING 8 LINES
 ------------------------------------------------------------------------------------------------
@@ -7638,7 +7638,7 @@ FOUND 7 ERRORS AND 1 WARNING AFFECTING 6 LINES
  12 | ERROR   | [x] Expected 1 spaces before closing parenthesis; 0 found
  14 | ERROR   | [x] Expected 1 spaces after opening parenthesis; 0 found
  14 | ERROR   | [x] Expected 1 spaces before closing parenthesis; 0 found
- 18 | WARNING | [ ] Duplicate class name "WP_Plugin\Classes\Input" found; first defined in /home/jafran/Local
+ 18 | WARNING | [ ] Duplicate class name "SamplePlugin\Classes\Input" found; first defined in /home/jafran/Local
     |         |     Sites/appdets/app/public/wp-content/plugins/sample-plugin/includes/classes/class-input.php on line 18
  45 | ERROR   | [x] Short array syntax is not allowed
  74 | ERROR   | [x] File must end with a newline character
