@@ -15,7 +15,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugin') ) {
 	/**
 	 * Plugin class.
 	 */
-	final class Plugin {
+	class Plugin {
 
 		/**
 		 * Plugin file.
@@ -30,7 +30,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugin') ) {
 		 * @param string $file Plugin file.
 		 */
 		public function __construct( $file = null ) {
-			$this->file = $file ? $file : __FILE__;
+			$this->file = isset( $file ) ? $file : __FILE__;
 		}
 
 		/**
@@ -45,11 +45,20 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugin') ) {
 		/**
 		 * Get plugin directory.
 		 *
-		 * @param  string $append Append to directory.
 		 * @return string
 		 */
-		public function get_dir( $append = '' ) {
-			return plugin_dir_path($this->get_file()) . $append;
+		public function get_dir() {
+			return plugin_dir_path($this->get_file());
+		}
+
+		/**
+		 * Get plugin path.
+		 *
+		 * @param  string $append Append to path.
+		 * @return string
+		 */
+		public function get_path( $append = '' ) {
+			return $this->get_dir() . trim($append, '/');
 		}
 
 		/**
@@ -59,7 +68,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugin') ) {
 		 * @return string
 		 */
 		public function get_url( $append = '' ) {
-			return plugin_dir_url($this->get_file()) . $append;
+			return plugin_dir_url($this->get_file()) . trim($append, '/');
 		}
 
 		/**
@@ -83,10 +92,11 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugin') ) {
 		/**
 		 * Get plugin data.
 		 *
+		 * @param  string $key Key to get.
 		 * @return string
 		 */
-		public function get_data() {
-			return get_file_data(
+		public function get_data( $key = null ) {
+			$data = get_file_data(
 				$this->get_file(), [
 					'name'        => 'Plugin Name',
 					'version'     => 'Version',
@@ -98,6 +108,12 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugin') ) {
 					'network'     => 'Network',
 				]
 			);
+
+			if ( isset( $key ) ) {
+				return isset( $data[ $key ] ) ? $data[ $key ] : '';
+			}
+
+			return $data;
 		}
 
 	}

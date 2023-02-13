@@ -12,14 +12,16 @@ namespace SamplePlugin\Classes;
 // Exit if accessed directly.
 defined('ABSPATH') || exit(1);
 
+
 // Use base controller.
 use SamplePlugin\Base\Controller as Controller;
 
+
 if ( ! class_exists( __NAMESPACE__ . '\Install' ) ) {
 	/**
-	 * Handles installation and uninstallation of the plugin
+	 * Handles installation and un-installation of the plugin
 	 */
-	final class Install extends Controller {
+	class Install extends Controller {
 
 		/**
 		 * Registers all the ajax hooks

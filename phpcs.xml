@@ -138,7 +138,6 @@
 
     <!-- WordPress; WordPress Standard, Security, Files, Docs, Extra Everything -->
     <rule ref="WordPress" />
-    <rule ref="WordPress" />
 
 	<!-- Allow short ternary (codition ? true : false) -->
 	<rule ref="WordPress.PHP.DisallowShortTernary.Found" />

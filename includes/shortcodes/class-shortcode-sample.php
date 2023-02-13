@@ -12,14 +12,16 @@ namespace SamplePlugin\Shortcodes;
 // Exit if accessed directly.
 defined('ABSPATH') || exit(1);
 
+
 // Use base controller.
 use SamplePlugin\Base\Controller as Controller;
+
 
 if ( ! class_exists( __NAMESPACE__ . '\Sample' ) ) {
 	/**
 	 * Sample Shortcode class.
 	 */
-	final class Sample extends Controller {
+	class Sample extends Controller {
 
 		/**
 		 * Registers shortcode

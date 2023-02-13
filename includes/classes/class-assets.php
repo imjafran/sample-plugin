@@ -12,14 +12,16 @@ namespace SamplePlugin\Classes;
 // Exit if accessed directly.
 defined('ABSPATH') || exit(1);
 
+
 // Use base controller.
 use SamplePlugin\Base\Controller as Controller;
+
 
 if ( ! class_exists( __NAMESPACE__ . '\Assets' ) ) {
 	/**
 	 * Frontend Assets class.
 	 */
-	final class Assets extends Controller {
+	class Assets extends Controller {
 
 		/**
 		 * Registers enqueues all the assets

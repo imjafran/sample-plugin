@@ -12,11 +12,12 @@ namespace SamplePlugin\Helper\Classes;
 // Exit if accessed directly.
 defined('ABSPATH') || exit(1);
 
-if ( ! class_exists( __NAMESPACE__ . '\Options') ) {
+
+if ( ! class_exists( __NAMESPACE__ . '\Option') ) {
 	/**
 	 * Options class.
 	 */
-	final class Options {
+	final class Option {
 
 		/**
 		 * Prefix of the option.
@@ -58,21 +59,21 @@ if ( ! class_exists( __NAMESPACE__ . '\Options') ) {
 		 *
 		 * @return array
 		 */
-		public function default_options() {
-			return apply_filters($this->get_prefix() . 'default_options', $this->options);
+		public function defaults() {
+			return apply_filters($this->get_prefix() . 'defaults', $this->options);
 		}
 
 		/**
-		 * Get option keys
+		 * Gets option keys
 		 *
 		 * @return array
 		 */
 		public function get_keys() {
-			return array_keys($this->default_options());
+			return array_keys($this->defaults());
 		}
 
 		/**
-		 * Get option value.
+		 * Gets option value.
 		 *
 		 * @param  string $key     Key to get.
 		 * @param  mixed  $default Default value.
@@ -81,7 +82,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Options') ) {
 		public function get( $key, $default = null ) {
 
 			if ( empty($default) ) {
-				$default = $this->default_options();
+				$default = $this->defaults();
 				$default = isset($default[ $key ]) ? $default[ $key ] : '';
 			}
 
@@ -95,15 +96,15 @@ if ( ! class_exists( __NAMESPACE__ . '\Options') ) {
 		}
 
 		/**
-		 * Get all options.
+		 * Gets all options.
 		 *
 		 * @return array
 		 */
 		public function get_all() {
-			$default_options = $this->default_options();
-			$options         = [];
+			$defaults = $this->defaults();
+			$options  = [];
 
-			foreach ( $default_options as $key => $value ) {
+			foreach ( $defaults as $key => $value ) {
 				$options[ $key ] = $this->get($key, $value);
 			}
 
@@ -111,35 +112,46 @@ if ( ! class_exists( __NAMESPACE__ . '\Options') ) {
 		}
 
 		/**
-		 * Update option value.
+		 * Updates/Sets option value.
 		 *
 		 * @param  string $key   Key to update.
 		 * @param  mixed  $value Value to update.
 		 * @return bool
 		 */
-		public function update( $key, $value ) {
-			return update_option($this->prefix . $key, $value);
+		public function set( $key, $value ) {
+			return update_option($this->get_prefix() . $key, $value);
 		}
 
 		/**
-		 * Delete option value.
+		 * Adds option value.
+		 *
+		 * @param  string $key   Key to add.
+		 * @param  mixed  $value Value to add.
+		 * @return bool
+		 */
+		public function add( $key, $value ) {
+			return add_option($this->get_prefix() . $key, $value);
+		}
+
+		/**
+		 * Deletes option value.
 		 *
 		 * @param  string $key Key to delete.
 		 * @return bool
 		 */
 		public function delete( $key ) {
-			return delete_option($this->prefix . $key);
+			return delete_option($this->get_prefix() . $key);
 		}
 
 		/**
-		 * Reset options.
+		 * Resets options.
 		 *
 		 * @return void
 		 */
 		public function reset() {
-			$default_options = $this->default_options();
-			foreach ( $default_options as $key => $value ) {
-				$this->update($key, $value);
+			$defaults = $this->defaults();
+			foreach ( $defaults as $key => $value ) {
+				$this->set($key, $value);
 			}
 		}
 	}

@@ -63,57 +63,5 @@ if ( ! trait_exists('Utilities') ) {
 			$this->options  = new Options();
 			$this->plugin   = new Plugin();
 		}
-
-		/**
-		 * Input class instance
-		 *
-		 * @return Input
-		 */
-		public function input() {
-			if ( ! $this->input ) {
-				$this->input = new Input();
-			}
-
-			return $this->input;
-		}
-
-		/**
-		 * Response class instance
-		 *
-		 * @return Response
-		 */
-		public function response() {
-			if ( ! $this->response ) {
-				$this->response = new Response();
-			}
-
-			return $this->response;
-		}
-
-		/**
-		 * Options class instance
-		 *
-		 * @return Options
-		 */
-		public function options() {
-			if ( ! $this->options ) {
-				$this->options = new Options();
-			}
-
-			return $this->options;
-		}
-
-		/**
-		 * Plugin class instance
-		 *
-		 * @return Plugin
-		 */
-		public function plugin() {
-			if ( ! $this->plugin ) {
-				$this->plugin = new Plugin();
-			}
-
-			return $this->plugin;
-		}
 	}
 }

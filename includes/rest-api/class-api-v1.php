@@ -15,7 +15,6 @@ defined('ABSPATH') || exit(1);
 
 // Use base controller.
 use SamplePlugin\Base\REST_API as REST_API;
-use \WP_REST_Request;
 
 
 if ( ! class_exists( __NAMESPACE__ . '\'API_V1') ) {
@@ -53,6 +52,6 @@ if ( ! class_exists( __NAMESPACE__ . '\'API_V1') ) {
 		}
 	}
 
-	// Instantiate.
+	// Initialize the class.
 	API_V1::Init();
 }

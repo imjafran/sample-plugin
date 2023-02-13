@@ -12,14 +12,16 @@ namespace SamplePlugin\Admin\Menus;
 // Exit if accessed directly.
 defined('ABSPATH') || exit(1);
 
+
 // Use base controller.
 use SamplePlugin\Base\Controller as Controller;
+
 
 if ( ! class_exists( __NAMESPACE__ . '\Assets' ) ) {
 	/**
 	 * Admin Menus class.
 	 */
-	final class Menus extends Controller {
+	class Menus extends Controller {
 
 		/**
 		 * Registers menus
@@ -27,8 +29,18 @@ if ( ! class_exists( __NAMESPACE__ . '\Assets' ) ) {
 		 * @return void
 		 */
 		public function register_hooks() {
-			add_action('admin_enqueue_scripts', [ $this, 'enqueue_assets' ]);
+			add_action('admin_menu', [ $this, 'register_menus' ]);
 		}
+
+		/**
+		 * Registers all the menus
+		 *
+		 * @return void
+		 */
+		public function register_menus() {
+
+		}
+
 
 	}
 

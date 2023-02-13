@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Abstract Base Class
  *
@@ -24,7 +23,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Controller' ) ) {
 		 *
 		 * @var self
 		 */
-		public static $instance = null;
+		public static $instance;
 
 		/**
 		 * Returns singleton instance of the Class
@@ -63,17 +62,13 @@ if ( ! class_exists( __NAMESPACE__ . '\Controller' ) ) {
 		 *
 		 * @return void
 		 */
-		public function add_actions() {
-
-		}
+		public function add_actions() {}
 
 		/**
 		 * Adds all the filter hooks
 		 *
 		 * @return void
 		 */
-		public function add_filters() {
-
-		}
+		public function add_filters() {}
 	}
 }
